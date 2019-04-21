@@ -48,15 +48,20 @@ void print(node*head){
     return;
 }
 
-void build_list(node*&head, int n){
+void build_list(node*&head){
     int data;
-    while(n>0){
-        cin>>data;
+    cin>>data;
+    while(data != -1){
         insertAtTail(head, data);
-        n--;
+        cin>>data;
     }
 
     return;
+}
+
+istream& operator>>(istream& is, node*&head){
+    build_list(head);
+    return is;
 }
 
 ostream& operator<<(ostream& os, node*head){
@@ -64,41 +69,29 @@ ostream& operator<<(ostream& os, node*head){
     return os;
 }
 
-node*merge_sorted_linked_lists(node*a, node*b){
-    if(a==NULL)
-        return b;
-    else if(b==NULL)
-        return a;
+node*kth_node_from_last(node*head, int k){
+    node*slow = head;
+    node*fast = head;
 
-    node*c;
-    if(a->data < b->data){
-        c = a;
-        c->next = merge_sorted_linked_lists(a->next, b);
+    while(k--){
+        fast = fast->next;
     }
-    else{
-        c = b;
-        c->next = merge_sorted_linked_lists(a, b->next);
+
+    while(fast!=NULL){
+        slow = slow->next;
+        fast = fast->next;
     }
-    return c;
+    return slow;
 }
 
 int main(){
-    int tc;
-    cin>>tc;
-    while(tc--){
-        int n;
-        cin>>n;
-        node*a = NULL;
-        build_list(a, n);
+    node*head = NULL;
+    cin>>head;
 
-        int m;
-        cin>>m;
-        node*b = NULL;
-        build_list(b, m);
+    int k;
+    cin>>k;
+    cout<<kth_node_from_last(head, k)->data;
 
-        node*c = merge_sorted_linked_lists(a, b);
-        cout<<c;
-    }
     return 0;
 }
 
