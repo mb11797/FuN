@@ -1,0 +1,22 @@
+###############
+“void pointer” 
+A void pointer is nothing but a pointer variable declared using the reserved word in C ‘void’. 
+
+Ex:-   void  *ptr; // Now ptr is a general purpose pointer variable
+
+When a pointer variable is declared using keyword void – it becomes a general purpose pointer variable. Address of any variable of any data type (char, int, float etc.)can be assigned to a void pointer variable.
+###############
+
+###############
+Another important point you should keep in mind about void pointers is that – pointer arithmetic can not be performed in a void pointer. 
+
+Example:- 
+
+void *ptr;
+
+int a;
+
+ptr=&a;
+
+ptr++; // This statement is invalid and will result in an error because 'ptr' is a void pointer variable.
+################
