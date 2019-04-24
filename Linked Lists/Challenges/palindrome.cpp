@@ -68,20 +68,39 @@ ostream& operator<<(ostream& os, node*head){
     return os;
 }
 
+node*reversed(node*head){
+    node*prev = NULL;
+    node*curr = head;
+    node*nxt;
+    while(curr!=NULL){
+        nxt = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nxt;
+    }
+    return prev;
+}
+
 bool check_palindrome(node*head, int n){
+    node*slow = head;
+    node*fast = head;
 
-    int mid;
-    if(n%2 == 0){
-        mid = n/2;
+    while(fast != NULL && fast->next != NULL){
+        fast = fast->next->next;
+        slow = slow->next;
     }
-    else
-        mid = (n/2) + 1;
-    for(int i=0; i<n; i++){
-        if(i<mid){
 
+    slow = reversed(slow);
+    fast = head;
+
+    while(slow!=NULL){
+        if(slow->data != fast->data){
+            return false;
         }
+        slow = slow->next;
+        fast = fast->next;
     }
-
+    return true;
 }
 
 int main(){
@@ -92,5 +111,11 @@ int main(){
     build_list(head, n);
 
     bool palindromeHai = check_palindrome(head, n);
+    if(palindromeHai){
+        cout<<"True"<<endl;
+    }
+    else{
+        cout<<"False"<<endl;
+    }
     return 0;
 }
