@@ -8,11 +8,11 @@ void stock_span(int*stock, int n){
 
     for(int day = 0; day<n; day++){
         int currPrice = stock[day];
-        int betterDay = day;
+
         while(!s.empty() && currPrice > stock[s.top()]){
             s.pop();
-            betterDay--;
         }
+        int betterDay = s.empty()? 0 : s.top();
         int span = day - betterDay;
         ans[day] = span;
         s.push(day);
