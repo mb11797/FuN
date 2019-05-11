@@ -20,14 +20,14 @@ void insertAtHead(node*&head, int data){
     node*n = new node(data);
     n->next = head;
     head = n;
+    return;
 }
 
 void insertAtTail(node*&head, int data){
     if(head==NULL){
-        head = new node(data);
+        insertAtHead(head, data);
         return;
     }
-
     node*tail = head;
     while(tail->next!=NULL){
         tail = tail->next;
@@ -37,32 +37,52 @@ void insertAtTail(node*&head, int data){
 }
 
 void print(node*head){
-//    node*temp = head;
-//    while(temp!=NULL){
-//        cout<<temp->data<<"->";
-//        temp = temp->next;
-//    }
-//OR
     while(head!=NULL){
-        cout<<head->data<<"->";
+        cout<<head->data<<" ";
         head = head->next;
     }
+    cout<<endl;
+    return;
+}
+
+int length(node*&head){
+    int l=0;
+    while(head!=NULL){
+        l++;
+        head = head->next;
+    }
+    return l;
 }
 
 void buildList(node*&head){
+    int n;
+    cin>>n;
     int data;
-    cin>>data;
-
-    while(data != -1){
-        insertAtTail(head, data);
+    while(n--){
         cin>>data;
+        insertAtTail(head, data);
     }
+    return;
 }
 
-int main(){
-    node*head = NULL;
+istream& operator>>(istream &is, node*&head){
     buildList(head);
+    return is;
+}
+
+ostream& operator<<(ostream &os, node*head){
     print(head);
+    return os;
+}
+
+
+
+int main(){
+    node*head1 = NULL;
+    cin>>head;
+    node*head2 = NULL;
+    cin>>head2;
+
 
     return 0;
 }

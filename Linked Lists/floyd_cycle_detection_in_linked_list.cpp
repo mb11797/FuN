@@ -74,11 +74,6 @@ ostream& operator<<(ostream& os, node*head){
     return os;
 }
 
-void cycle_creation(node*&head){
-
-
-}
-
 bool detect_cycle(node*head){
     node*slow = head;
     node*fast = head;
