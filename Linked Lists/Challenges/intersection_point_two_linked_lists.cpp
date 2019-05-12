@@ -45,7 +45,7 @@ void print(node*head){
     return;
 }
 
-int length(node*&head){
+int length(node*head){
     int l=0;
     while(head!=NULL){
         l++;
@@ -75,14 +75,71 @@ ostream& operator<<(ostream &os, node*head){
     return os;
 }
 
+int check_intersection(node*head1, node*head2){
+    int l1 = length(head1);
+    int l2 = length(head2);
 
+    int intersectn_pt;
+    int flag=0;
+    if(l1>l2){
+        int diff = l1-l2;
+        while(diff--){
+            head1 = head1->next;
+        }
+        while(head1 && head2){
+            if(head1->data == head2->data){
+                flag++;
+                if(flag==1){
+                    intersectn_pt = head1->data;
+                }
+            }
+            else{
+                flag = 0;
+            }
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+        if(flag!=0){
+            return intersectn_pt;
+        }
+        else{
+            return -1;
+        }
+    }
+    else{
+        int diff = l2-l1;
+        while(diff--){
+            head2 = head2->next;
+        }
+        while(head1 && head2){
+            if(head1->data == head2->data){
+                flag++;
+                if(flag==1){
+                    intersectn_pt = head1->data;
+                }
+            }
+            else{
+                flag = 0;
+            }
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+        if(flag!=0){
+            return intersectn_pt;
+        }
+        else{
+            return -1;
+        }
+    }
+}
 
 int main(){
     node*head1 = NULL;
-    cin>>head;
+    cin>>head1;
     node*head2 = NULL;
     cin>>head2;
 
-
+    int intersectn_pt = check_intersection(head1, head2);
+    cout<<intersectn_pt<<endl;
     return 0;
 }
