@@ -57,38 +57,6 @@ void printPost(node*root){
     cout<<root->data<<" ";
 }
 
-int height(node*root){
-    if(root==NULL)
-        return 0;
-
-    int ls_height = height(root->left);                     //left subtree height
-    int rs_height = height(root->right);
-    return max(ls_height, rs_height)+1;
-}
-
-void print_Kth_level(node*root, int k){
-    if(root==NULL)
-        return;
-    if(k==1){
-        cout<<root->data<<" ";
-        return;
-    }
-    print_Kth_level(root->left, k-1);
-    print_Kth_level(root->right, k-1);
-    return;
-}
-
-void print_All_levels(node*root){
-    if(root==NULL)
-        return;
-    int ht_tree = height(root);
-    for(int i=1; i<=ht_tree; i++){
-        print_Kth_level(root, i);
-        cout<<endl;
-    }
-    return;
-}
-
 int main(){
     node*root = buildTree();
 
@@ -99,14 +67,7 @@ int main(){
     printPost(root);
     cout<<endl;
 
-    cout<<height(root)<<endl;
 
-    print_Kth_level(root, 3);
-    cout<<endl;
-    print_Kth_level(root, 2);
-    cout<<endl;
-
-    print_All_levels(root);
 
     return 0;
 }
