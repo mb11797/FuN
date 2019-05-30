@@ -42,66 +42,81 @@ node*build_tree_from_level_0rder_input(){
     return root;
 }
 
-void print_kth_level(node*root, int k){
-    if(root==NULL){
+//void print_kth_level(node*root, int k){
+//    if(root==NULL){
+//        return;
+//    }
+//    if(k == 1){
+//        cout<<root->data<<" ";
+//        return;
+//    }
+//    print_kth_level(root->left, k-1);
+//    print_kth_level(root->right, k-1);
+//    return;
+//}
+//
+//int height(node*root){
+//    if(root == NULL)
+//        return 0;
+//
+//    int ht_left = height(root->left);
+//    int ht_right = height(root->right);
+//
+//    return 1 + max(ht_left, ht_right);
+//}
+//
+//void print_all_levels(node*root){
+//    if(root == NULL)
+//        return;
+//
+//    int ht = height(root);
+//    for(int i=1; i<=ht; i++){
+//        print_kth_level(root, i);
+//        cout<<endl;
+//    }
+//    return;
+//}
+//
+//void left_view_bt(node*root){
+//    int ht = height(root);
+//    int i=1;
+//    node*temp = root;
+//    while(i<=ht){
+//        cout<<temp->data<<" ";
+//        temp = temp->left;
+//        i++;
+//    }
+//    return;
+//}
+
+void left_view_binary_tree(node*root, int cur_level, int *max_visited){
+    if(root==NULL)
         return;
-    }
-    if(k == 1){
+
+    if(*max_visited < cur_level){
         cout<<root->data<<" ";
-        return;
+        *max_visited = cur_level;
     }
-    print_kth_level(root->left, k-1);
-    print_kth_level(root->right, k-1);
-    return;
+    left_view_binary_tree(root->left, cur_level + 1, max_visited);
+    left_view_binary_tree(root->right, cur_level + 1, max_visited);
 }
-
-int height(node*root){
-    if(root == NULL)
-        return 0;
-
-    int ht_left = height(root->left);
-    int ht_right = height(root->right);
-
-    return 1 + max(ht_left, ht_right);
-}
-
-void print_all_levels(node*root){
-    if(root == NULL)
-        return;
-
-    int ht = height(root);
-    for(int i=1; i<=ht; i++){
-        print_kth_level(root, i);
-        cout<<endl;
-    }
-    return;
-}
-
-void left_view_bt(node*root){
-    int ht = height(root);
-    int i=1;
-    node*temp = root;
-    while(i<=ht){
-        cout<<temp->data<<" ";
-        temp = temp->left;
-        i++;
-    }
-    return;
-}
-
 
 int main(){
     node*root = build_tree_from_level_0rder_input();
 
-    print_kth_level(root, 1);
-    cout<<endl;
-    print_kth_level(root, 2);
-    cout<<endl;
-    cout<<height(root);
-    cout<<endl;
-    print_all_levels(root);
-    cout<<endl;
+//    print_kth_level(root, 1);
+//    cout<<endl;
+//    print_kth_level(root, 2);
+//    cout<<endl;
+//    cout<<height(root);
+//    cout<<endl;
+//    print_all_levels(root);
+//    cout<<endl;
 
-    left_view_bt(root);
+//    left_view_bt(root);
+
+    int max_visited = 0;
+    left_view_binary_tree(root, 1, &max_visited);
+
     return 0;
 }
