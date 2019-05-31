@@ -22,12 +22,19 @@ class Heap{
 
         int minIndex = i;
         if(left<v.size() && compare(v[left], v[i]))
-            minIndex =
+            minIndex = left;
+        if(right<v.size() && compare(v[right], v[minIndex]))
+            minIndex = right;
+
+        if(minIndex != i){
+            swap(v[i], v[minIndex]);
+            heapify(minIndex);
+        }
     }
 
 public:
     Heap(bool type = true){
-        minHeap = type;
+        minHeap = type;                     //true->minHeap && false->maxHeap
         //block the 0th index
         v.push_back(-1);
     }
@@ -64,7 +71,9 @@ public:
 
 
 int main(){
-    Heap h(false);
+//    Heap h;
+//    Heap h(false);
+    Heap h(true);
     h.push(5);
     h.push(15);
     h.push(2);
@@ -72,6 +81,11 @@ int main(){
     h.push(3);
 
     cout<<h.top()<<endl;
+
+    while(!h.empty()){
+        cout<<h.top()<<" ";
+        h.pop();
+    }
 
     return 0;
 }
