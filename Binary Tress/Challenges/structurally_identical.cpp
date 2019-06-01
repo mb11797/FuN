@@ -1,6 +1,8 @@
 #include<iostream>
 using namespace std;
 
+//10 true 20 true 40 false false true 50 false false true 30 true 60 false false true 73 false false
+
 /*
 When we say structurally identical trees, we mean that both the trees have exactly the same number of nodes, arranged in the exactly same way. It is not necessary that the value of each node should also be the same.
 
@@ -11,6 +13,7 @@ The algorithm we will follow will be therefore:-
 If both trees are NULL, return true.
 If both trees are not NULL, then compare data and recursively check left and right sub-tree structures.
 */
+
 
 class node{
 public:
