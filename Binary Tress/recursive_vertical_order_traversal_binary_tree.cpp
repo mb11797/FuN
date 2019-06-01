@@ -77,6 +77,8 @@ void vertical_order_traversal_print(node*root){
             cout<<it->second[i]<<" ";
         }
         cout<<endl;
+//        cout<<it->second[0]<<" ";                       // for top view of binary tree
+//        cout<<it->second[it->second.size()-1]<<" ";     // for bottom view of binary tree
     }
 
     return;

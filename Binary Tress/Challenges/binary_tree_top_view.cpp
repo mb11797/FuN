@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<map>
 using namespace std;
 
 class node{
@@ -53,27 +54,45 @@ void preorder_print(node*root){
     return;
 }
 
-void bt_top_view(node*root, int level, char sub_tree){
-    if(sub_tree=='l' && root->left==NULL){
-        cout<<root->data<<" ";
+void top_view_binary_tree(node*root){
+    if(root==NULL)
         return;
-    }
-    if(sub_tree=='r' && root->right==NULL){
-        cout<<root->data<<" ";
-        return;
-    }
-    bt_top_view(root->left, level+1, 'l');
-    cout<<root->data<<" ";
-    if(level==1){
-        bt_top_view(root->right, level+1, 'r');
+
+    map<int, int> m;
+
+    queue<pair<node*, int>> q;                  //pair - curr_node and horizontal_distance_from_root
+
+    q.push({root, 0});
+    while(!q.empty()){
+        pair<node*, int> f = q.front();
+        node*temp = f.first;
+        int h_d = f.second;
+        q.pop();
+
+        if(m.find(h_d) == m.end()){
+            m[h_d] = temp->data;
+        }
+
+        if(temp->left){
+            q.push({temp->left, h_d - 1});
+        }
+        if(temp->right){
+            q.push({temp->right, h_d + 1});
+        }
     }
 
+    map<int, int> :: iterator it;
+    for(it = m.begin(); it!=m.end(); it++){
+        cout<<it->second<<" ";
+    }
 }
 
 int main(){
     node*root = build_tree_from_level_0rder_input();
 
     preorder_print(root);
-
+    cout<<endl;
+    top_view_binary_tree(root);
+    cout<<endl;
     return 0;
 }
