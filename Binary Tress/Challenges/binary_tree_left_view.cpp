@@ -101,6 +101,16 @@ void left_view_binary_tree(node*root, int cur_level, int *max_visited){
     left_view_binary_tree(root->right, cur_level + 1, max_visited);
 }
 
+void preorder_print(node*root){
+    if(root==NULL)
+        return;
+
+    cout<<root->data<<" ";
+    preorder_print(root->left);
+    preorder_print(root->right);
+    return;
+}
+
 int main(){
     node*root = build_tree_from_level_0rder_input();
 
