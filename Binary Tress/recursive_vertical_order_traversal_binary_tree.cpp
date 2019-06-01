@@ -17,6 +17,7 @@ public:
     }
 };
 
+
 node*build_tree_from_level_0rder_input(){
     int data;
     cin>>data;
@@ -47,64 +48,45 @@ node*build_tree_from_level_0rder_input(){
     return root;
 }
 
-void preorder_print(node*root){
-    if(root==NULL)
+void get_vertical_order(node*root, int h_d, map<int, vector<int>> &m){
+    if(root == NULL)
         return;
 
-    cout<<root->data<<" ";
-    preorder_print(root->left);
-    preorder_print(root->right);
+    //store current node in map m
+    m[h_d].push_back(root->data);
+
+    //store nodes in left subtree
+    get_vertical_order(root->left, h_d - 1, m);
+
+    //store nodes in right subtree
+    get_vertical_order(root->right, h_d + 1, m);
+
     return;
 }
 
-class node_n_dist{
-public:
-    int dist;
-    node*n;
-
-    node_n_dist(node*root, int dis){
-        dist = dis;
-        n = root;
-    }
-};
-
-void vertical_order_traversal(node*root){
-    if(root == NULL)
-        return;
+void vertical_order_traversal_print(node*root){
     map<int, vector<int>> m;
-    queue<node_n_dist*> q;
-    node_n_dist*n_n_d = new node_n_dist(root, 0);
-    q.push(n_n_d);
-    while(!q.empty()){
-        node_n_dist*f = q.front();
-        q.pop();
-        m[f->dist].push_back(f->n->data);
-        if(f->n->left != NULL){
-            q.push(new node_n_dist(f->n->left, f->dist - 1));
-        }
-        if(f->n->right != NULL){
-            q.push(new node_n_dist(f->n->right, f->dist + 1));
-        }
-    }
+    int h_d = 0;                     //horizontal distance from root
+    get_vertical_order(root, h_d, m);
 
+    //traverse the map and print the nodes at every horizontal distance
     map<int, vector<int>> :: iterator it;
     for(it = m.begin(); it != m.end(); it++){
         cout<<it->first<<" : ";
-        for(int i=0; i<it->second.size(); i++)
+        for(int i=0; i<it->second.size(); i++){
             cout<<it->second[i]<<" ";
-
+        }
         cout<<endl;
-
     }
 
+    return;
 }
-
 
 int main(){
     node*root = build_tree_from_level_0rder_input();
-    preorder_print(root);
-    cout<<endl;
 
-    vertical_order_traversal(root);
+    vertical_order_traversal_print(root);
+
     return 0;
 }
+
