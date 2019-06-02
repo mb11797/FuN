@@ -1,19 +1,23 @@
 #include<iostream>
 using namespace std;
 
-int tiling_ways(int n, int m){
+#define ll long long
+
+ll tiling_ways(ll n, ll m){
     if(n<m)
         return 1;
 
-    if(n>=m)
-        return tiling_ways(n-1, m) + tiling_ways(n-m, m);
+    return tiling_ways(n-1, m) + tiling_ways(n-m, m);
 }
 
 int main(){
-    int n, m;
-    cin>>n>>m;
+    ll tc;
+    cin>>tc;
+    while(tc--){
+        ll n, m;
+        cin>>n>>m;
 
-    cout<<tiling_ways(n, m);
-
+        cout<<tiling_ways(n, m)<<endl;
+    }
     return 0;
 }
