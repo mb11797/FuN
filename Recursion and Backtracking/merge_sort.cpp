@@ -1,16 +1,14 @@
 #include<iostream>
 using namespace std;
 
-#define ll long long
+void merge(int arr[], int s, int e){
+    int mid = (s+e)/2;
 
-void merge(ll arr[], ll s, ll e){
-    ll mid = (s+e)/2;
+    int i = s;
+    int j = mid+1;
+    int k = s;
 
-    ll i = s;
-    ll j = mid+1;
-    ll k = s;
-
-    ll temp[100];
+    int temp[100];
 
     while(i<=mid && j<=e){
         if(arr[i]<arr[j])
@@ -26,19 +24,19 @@ void merge(ll arr[], ll s, ll e){
         temp[k++] = arr[j++];
 
     //Now we need to copy all elements from temp array to original array
-    for(ll i=s; i<=e; i++)
+    for(int i=s; i<=e; i++)
         arr[i] = temp[i];
 
 }
 
 
-void merge_sort(ll arr[], ll s, ll e){
+void merge_sort(int arr[], int s, int e){
     if(s>=e)
         return;
 
     //follow 3 steps:
     //1st: Divide
-    ll mid = (s+e)/2;
+    int mid = (s+e)/2;
 
     //2nd: Recursively sort the arrays - s->mid and mid+1->e
     merge_sort(arr, s, mid);
@@ -50,16 +48,16 @@ void merge_sort(ll arr[], ll s, ll e){
 }
 
 int main(){
-    ll n;
+    int n;
     cin>>n;
-    ll arr[n];
-    for(ll i=0; i<n; i++)
+    int arr[n];
+    for(int i=0; i<n; i++)
         cin>>arr[i];
 
     merge_sort(arr, 0, n-1);
 
-    for(ll i=0; i<n; i++)
-        cout<<arr[i]<<" ";
+    for(int i=0; i<n; i++)
+        cout<<arr[i]<<", ";
 
     return 0;
 }
