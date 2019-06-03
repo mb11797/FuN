@@ -10,7 +10,7 @@ void merge(ll arr[], ll s, ll e){
     ll j = mid+1;
     ll k = s;
 
-    ll temp[100];
+    ll temp[100000];
 
     while(i<=mid && j<=e){
         if(arr[i]<arr[j])
@@ -52,7 +52,7 @@ void merge_sort(ll arr[], ll s, ll e){
 int main(){
     ll n;
     cin>>n;
-    ll arr[n];
+    ll arr[100000];
     for(ll i=0; i<n; i++)
         cin>>arr[i];
 
