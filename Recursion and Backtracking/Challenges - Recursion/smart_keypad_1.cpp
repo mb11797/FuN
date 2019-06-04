@@ -13,9 +13,10 @@ void print_keypad_string_codes(char*in, char*out, int i, int j){
 
     int digit = in[i] - '0';
 
-    if(digit==0)
-        print_keypad_string_codes(in, out, i+1, j);
-
+//    if(digit==0){
+//        out[i] = ' ';             //use only if (keypad[0]="") and not when (keypad[0]=" ")
+//        print_keypad_string_codes(in, out, i+1, j+1);
+//    }
     for(int kp=0; keypad[digit][kp] != '\0'; kp++){
         out[j] = keypad[digit][kp];
         print_keypad_string_codes(in, out, i+1, j+1);

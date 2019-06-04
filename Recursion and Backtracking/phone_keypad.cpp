@@ -15,7 +15,7 @@ void print_keypad_strings(char*in, char*out, int i, int j){
     }
 
     int digit = in[i] - '0';
-    if(digit==1)
+    if(digit==0 || digit==1)
         print_keypad_strings(in, out, i+1, j);
 
     for(int kp = 0; keypad[digit][kp]!='\0'; kp++){
