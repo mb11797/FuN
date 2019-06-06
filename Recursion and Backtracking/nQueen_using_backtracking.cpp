@@ -3,7 +3,7 @@ using namespace std;
 
 bool is_safe(int board[][10], int n, int i, int j){
     //same column check
-    for(int row=0; row<j; row++){
+    for(int row=0; row<i; row++){
         if(board[row][j]==1)
             return false;
     }
@@ -43,7 +43,7 @@ bool solve_nQueen(int board[][10], int n, int i){
             cout<<endl;
         }
         cout<<endl;
-        return true;
+        return false;
     }
     for(int j=0; j<n; j++){
         if(is_safe(board, n, i, j)){
