@@ -12,7 +12,7 @@ bool rat_in_a_maze(char maze[][10], int m, int n, int i, int j){
             cout<<endl;
         }
         cout<<endl;
-        return true;
+        return ;
     }
 
     if(i>m || j>n)

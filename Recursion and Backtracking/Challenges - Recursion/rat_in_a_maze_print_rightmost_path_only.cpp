@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-bool rat_in_a_maze(char maze[][10], int soln[][10], int m, int n, int i, int j){
+bool rat_in_a_maze(char maze[][100], int soln[][100], int m, int n, int i, int j){
     if(i==m && j==n){
         soln[i][j] = 1;
         for(int x=0; x<=m; x++){
@@ -37,12 +37,12 @@ int main(){
     int m, n;
     cin>>m>>n;
 
-    char maze[10][10];
+    char maze[100][100];
     for(int i=0; i<m; i++)
         for(int j=0; j<n; j++)
             cin>>maze[i][j];
 
-    int soln[10][10] = {0};
+    int soln[100][100] = {0};
     if(!rat_in_a_maze(maze, soln, m-1, n-1, 0, 0))
         cout<<-1<<endl;
 
