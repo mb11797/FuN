@@ -1,3 +1,5 @@
+//Nearest k cars among the n cars around the origin
+
 #include<iostream>
 #include<queue>
 #include<vector>
@@ -47,8 +49,11 @@ int main(){
         pq.push(c);
     }
 
+    int k;
+    cin>>k;
+
     //Min Heap
-    while(!pq.empty()){
+    while(!pq.empty() && k--){
         Car p = pq.top();
         p.print();
         pq.pop();
