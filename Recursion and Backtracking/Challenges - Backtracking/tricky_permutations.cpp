@@ -2,7 +2,7 @@
 #include<algorithm>
 using namespace std;
 
-void tricky_permute(string str, int i, string temp[], int &k){
+void tricky_permute(char*str, int i, string temp[], int &k){
     if(str[i]=='\0'){
         temp[k] = str;
         k++;
@@ -22,7 +22,7 @@ void tricky_permute(string str, int i, string temp[], int &k){
 }
 
 int main(){
-    string str;
+    char str[1000];
     cin>>str;
 
     int k = 0;
