@@ -3,11 +3,11 @@ using namespace std;
 
 void select_max_activities(int s[], int f[], int n){
     int i=0;
-    cout<<i<<" ";
+    cout<<i<<"- ("<<s[i]<<","<<f[i]<<")"<<endl;
 
     for(int j=1; j<n; j++){
         if(s[j]>=f[i]){
-            cout<<j<<" ";
+            cout<<j<<"- ("<<s[j]<<","<<f[j]<<")"<<endl;
             i=j;
         }
     }
