@@ -30,14 +30,16 @@ int maximum_non_overlapping_circles(int c[], int r[], int n){
 }
 
 int main(){
-    int c[] = {1,2,3,4};
-    int r[] = {1,1,1,1};
+    int n;
+    cin>>n;
 
-    int n = sizeof(c)/sizeof(int);
+    int c[n], r[n];
+    for(int i=0; i<n; i++)
+        cin>>c[i]>>r[i];
 
-    int m_c = maximum_non_overlapping_circles(c, r, n);
+    int mx_noc = maximum_non_overlapping_circles(c, r, n);
+    int n_remove = n - mx_noc;
+    cout<<n_remove<<endl;;
 
-    cout<<"Maximum circles selected: "<<m_c<<endl;
-    cout<<"Circles removed: "<<n-m_c;
     return 0;
 }
