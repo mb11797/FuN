@@ -4,22 +4,22 @@ using namespace std;
 
 #define ll long long
 
-ll find_no_of_distinct_integers(ll arr[], ll n){
+int find_no_of_distinct_integers(int arr[], int n){
     sort(arr, arr+n);
-    ll k = 1;
-    for(ll i=0; i<n; i++){
+    int k = 1;
+    for(int i=0; i<n; i++){
         if(arr[i]!=arr[i+1])
             k++;
     }
     return k;
 }
 
-ll* hash_array(ll A[], ll n, ll MAX)
+int* hash_array(int A[], int n, int MAX)
 {
-    ll* hash = new ll[MAX]; //MAX is the maximum possible value of A[i]
-    for(ll i=0;i<=MAX;i++) hash[i]=-1; //initialize hash to -1.
-    ll count = 0;
-    for(ll i=0;i<n;i++) // Loop through elements of array
+    int* hash = new int[MAX]; //MAX is the maximum possible value of A[i]
+    for(int i=0;i<=MAX;i++) hash[i]=-1; //initialize hash to -1.
+    int count = 0;
+    for(int i=0;i<n;i++) // Loop through elements of array
     {
         if(hash[A[i]] == -1) // A[i] was not assigned any hash before
         {
@@ -27,7 +27,7 @@ ll* hash_array(ll A[], ll n, ll MAX)
             count++;
             continue;
         }
-        for(ll j = 0;j<i;j++)
+        for(int j = 0;j<i;j++)
         {
             if(hash[A[j]] > hash[A[i]]) // All the hashes greater than previous hash of A[i] are decremented.
                 hash[A[j]]--;
@@ -38,26 +38,26 @@ ll* hash_array(ll A[], ll n, ll MAX)
 }
 
 int main(){
-    ll n;
+    int n;
     cin>>n;
 
-    ll arr[n];
+    int arr[n];
     cin>>arr[0];
 
-    ll MAX=arr[0];
+    int MAX=arr[0];
 
-    for(ll i=1; i<n; i++){
+    for(int i=1; i<n; i++){
         cin>>arr[i];
         if(arr[i]>MAX)
             MAX=arr[i];
     }
-    ll*hash = hash_array(arr, n, MAX);
+    int*hash = hash_array(arr, n, MAX);
 
-    ll k = find_no_of_distinct_integers(arr, n);
+    int k = find_no_of_distinct_integers(arr, n);
 
 
-    for(ll i=1; i<=k; i++){
-        for(ll j=0; j<=MAX; j++){
+    for(int i=1; i<=k; i++){
+        for(int j=0; j<=MAX; j++){
             if(hash[j]==i-1)
                 cout<<j<<endl;
         }
