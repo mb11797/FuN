@@ -82,6 +82,7 @@ public:
         }
     }
 
+    cout<<endl;
     for(auto i: adjList){
         T node = i.first;
         cout<<"Dist of "<<node<<" from "<<src<<" is "<<dist[node]<<endl;
