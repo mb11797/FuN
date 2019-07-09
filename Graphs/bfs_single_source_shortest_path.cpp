@@ -61,7 +61,7 @@ public:
     map<T, T> parent;
 
     for(auto i: adjList){
-        dist[i] = INT_MAX;
+        dist[i.first] = INT_MAX;
     }
 
     q.push(src);
@@ -79,17 +79,14 @@ public:
                 dist[neighbour] = dist[node] + 1;
                 parent[neighbour] = node;
             }
-
         }
     }
 
-    for(auto i: dist){
-        cout<<"Dist of "<<i<<"from "<<src<<" is "<<dist[i]<<endl;
+    for(auto i: adjList){
+        T node = i.first;
+        cout<<"Dist of "<<node<<" from "<<src<<" is "<<dist[node]<<endl;
     }
-
 }
-
-
 };
 
 
@@ -109,7 +106,7 @@ int main(){
     g.bfs(0);
     cout<<endl;
 
-
+    g.bfs_shortest_path(0);
 
     return 0;
 }
