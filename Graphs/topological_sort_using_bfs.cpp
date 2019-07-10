@@ -1,6 +1,7 @@
 #include<iostream>
 #include<map>
 #include<list>
+#include<queue>
 using namespace std;
 
 
@@ -29,40 +30,46 @@ public:
         }
     }
 
-    void dfs_helper(T node, map<T, bool> &visited, list<T> &ordering){
-        visited[node] = true;
-
-        //will call dfs on the unvisited neighbours of the current node
-        for(T neighbour: adjList[node]){
-            if(!visited[neighbour]){
-                dfs_helper(neighbour, visited, ordering);
-            }
-        }
-
-        //Add just 1 line for Topological sort
-        //At this point all the children of current node have been visited
-        //so we can add current node to the list
-        ordering.push_front(node);
-        return;
-    }
-
-    void dfs_topological_sort(){
+    void bfs_topological_sort(){
+        queue<T> q;
         map<T, bool> visited;
-        list<T> ordering;
+        map<T, int> indegree;
 
         for(auto i: adjList){
-            //i is pair - (node, list of nodes)
+            //i is a pair - (node, list)
             T node = i.first;
-            if(!visited[node]){
-                dfs_helper(node, visited, ordering);
-            }
+            visited[node] = false;
+            indegree[node] = 0;
         }
 
-        //Print all the elements in ordering
-        for(T element: ordering)
-            cout<<element<<"--->";
-        cout<<endl;
-        return;
+        //Init the indegrees of all nodes
+        for(auto i: adjList){
+            T u = i.first;
+            for(T v: adjList[u])
+                indegree[v]++;
+        }
+
+        //Find out all the nodes with 0 indegree
+        for(auto i: adjList){
+            T node = i.first;
+            if(indegree[node]==0)
+                q.push(node);
+        }
+
+        //start with the algorithm
+        while(!q.empty()){
+            T node = q.front();
+            cout<<node<<"--->";
+            q.pop();
+
+            for(T neighbour: adjList[node]){
+                indegree[neighbour]--;
+
+                if(indegree[neighbour]==0)
+                    q.push(neighbour);
+
+            }
+        }
     }
 };
 
@@ -86,8 +93,10 @@ int main(){
     g.print();
 
     cout<<endl;
-    cout<<"Topological Sorting using DFS: "<<endl;
-    g.dfs_topological_sort();
+    cout<<"Topological Sorting using BFS: "<<endl;
+    g.bfs_topological_sort();
+    cout<<endl;
 
     return 0;
 }
+
