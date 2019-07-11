@@ -75,7 +75,7 @@ int main(){
     cout<<endl;
 
     if(g.is_cyclic_BFS(0))
-        cout<<"Cyclic"<<endl;
+        cout<<"Cyclic Graph"<<endl;
     else
         cout<<"Not Cyclic"<<endl;
 
