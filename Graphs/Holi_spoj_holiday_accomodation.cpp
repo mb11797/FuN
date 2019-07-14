@@ -1,4 +1,5 @@
 #include<iostream>
+#include<list>
 using namespace std;
 
 class Graph{
@@ -13,6 +14,8 @@ public:
 };
 
 int main(){
+    Graph g(5);
+
 
     return 0;
 }
