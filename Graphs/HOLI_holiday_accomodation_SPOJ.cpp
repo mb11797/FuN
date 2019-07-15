@@ -52,9 +52,9 @@ public:
         int ans = 0;
         dfsHelper(0,visited,count,ans);
 
-       /* for(int i=0;i<V;i++){
+        for(int i=0;i<V;i++){
             cout<<count[i]<<" ";
-        }*/
+        }
         return ans;
 
     }
