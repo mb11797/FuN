@@ -55,8 +55,8 @@ public:
         for(int i=0;i<V;i++){
             cout<<count[i]<<" ";
         }
+        cout<<endl;
         return ans;
-
     }
 };
 
@@ -71,5 +71,5 @@ int main() {
 
     cout<<g.dfs();
 
-
+    return 0;
 }
