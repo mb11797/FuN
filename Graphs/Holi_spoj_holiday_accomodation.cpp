@@ -11,6 +11,10 @@ public:
         l = new list<pair<int, int>>[V];
     }
 
+    void addEdge(int u, int v, int cost, bool bidir=true){
+        l[u].push_back(make_pair(u, v));
+    }
+
 };
 
 int main(){
