@@ -10,7 +10,7 @@ public:
 };
 
 bool cmp(Edge e1, Edge e2){
-
+    return e1.weight < e2.weight;
 }
 
 void kruskals(Edge*input, int n, int e){
