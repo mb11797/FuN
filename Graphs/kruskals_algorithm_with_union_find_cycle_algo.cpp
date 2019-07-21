@@ -14,7 +14,7 @@ bool cmp(Edge e1, Edge e2){
 }
 
 void kruskals(Edge*input, int n, int e){
-    sort(input, input+e, cmp);
+    sort(input, input+e, cmp);          //It will sort the input array on the basis of the weights of the edges
     Edge*output = new Edge[n-1];
 }
 
