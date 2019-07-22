@@ -7,22 +7,20 @@ using namespace std;
 template<typename T>
 class Graph{
 public:
-    unordered_map<T, list<pair<T, int> > > m;
+    unordered_map<T, list<pair<T, int>>> m;
 
     void add_edge(T u, T v, int dist, bool bidir=true){
         m[u].push_back(make_pair(v, dist));
         if(bidir){
             m[v].push_back(make_pair(u, dist));
         }
+        return;
     }
 
     void print_adjList(){
-        //printing the adjacency list
-        //iterate all the key value pairs
-
         for(auto i: m){
             cout<<i.first<<"-->";
-            for(auto neighbour: m[i.first]){
+            for(auto neighbour: i.second){
                 cout<<"("<<neighbour.first<<", "<<neighbour.second<<") ";
             }
             cout<<endl;
@@ -34,47 +32,44 @@ public:
     void Dijkstra_SSSP(T src){
         unordered_map<T, int> dist;
 
-        //initially setting all distances to infinity
         for(auto i: m){
             dist[i.first] = INT_MAX;
         }
 
-        //making a set to find out a node with the minimum distance
-        set<pair<int, T> > s;           //sorting in set is done on the basis of the first parameter
+        set<pair<int, T>> s;
 
         dist[src] = 0;
         s.insert(make_pair(0, src));
 
         while(!s.empty()){
-            //find the pair at the front
-            auto p = *(s.begin());
-            T node = p.second;
 
+            auto p = *(s.begin());
             int node_dist = p.first;
+            T node = p.second;
             s.erase(s.begin());
 
-            //iterate over the neighbours/children of the current node
             for(auto child_pair: m[node]){
                 if(node_dist + child_pair.second < dist[child_pair.first]){
-                    //In a set, updation of a particular node is not possible,
-                    //we have to remove the old pair and insert the new pair to do simultaneous updation
+                    //update the distance in dist map
+
+                    //first find the pair in the set s and then erase it
                     T dest = child_pair.first;
                     auto f = s.find(make_pair(dist[dest], dest));
-                    if(f != s.end()){                //if f is found in the set
+                    if(f != s.end()){
                         s.erase(f);
                     }
 
-                    //Insert the new updated pair
+                    //insert the new updated pair
                     dist[dest] = node_dist + child_pair.second;
                     s.insert(make_pair(dist[dest], dest));
                 }
             }
         }
-        // Finally Print distance to all nodes from source node
+
+        //Finally print distance to all the nodes from source nodes
         for(auto d: dist){
-            cout<<d.first<<" is located at a minimum distance of "<<d.second<<" from "<<src<<endl;
+            cout<<d.first<<" is located at a distance of "<<d.second<<" from "<<src<<endl;
         }
-        return;
     }
 };
 
