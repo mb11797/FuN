@@ -33,7 +33,7 @@ public:
 
 int find(subset*subsets, int i){
     if(subsets[i].parent != i)
-        find(subsets, subsets[i].parent);
+        subsets[i].parent = find(subsets, subsets[i].parent);
     return subsets[i].parent;
 }
 
@@ -41,12 +41,16 @@ void Union(subset*subsets, int x, int y){
     int xroot = find(subsets, x);
     int yroot = find(subsets, y);
 
+
+    //attach similar rank tree under root of high rank tree
+    //(Union by rank)
     if(subsets[xroot].rank > subsets[yroot].rank){
         subsets[yroot].parent = xroot;
     }
     else if(subsets[yroot].rank > subsets[xroot].rank){
         subsets[xroot].parent = yroot;
     }
+    //if ranks are same, then make one as root and increment its rank by one
     else{
         subsets[yroot].parent = xroot;
         subsets[xroot].rank++;
@@ -54,6 +58,7 @@ void Union(subset*subsets, int x, int y){
 }
 
 bool is_cycle(Graph*graph){
+    //allocating memory for creating v sets
     subset*subsets = new subset[sizeof(subset) * graph->V];
 
     for(int v=0; v < graph->V; v++){
@@ -61,6 +66,9 @@ bool is_cycle(Graph*graph){
         subsets[v].rank = 0;
     }
 
+
+    //iterate through all edges of graph, find sets of both vertices of every edge,
+    //if sets are same, then there is cycle in graph
     for(int e=0; e < graph->E; e++){
         int x = find(subsets, graph->edge[e].src);
         int y = find(subsets, graph->edge[e].dest);
