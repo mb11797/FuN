@@ -1,6 +1,7 @@
 #include<iostream>
 #include<unordered_map>
 #include<list>
+#include<set>
 using namespace std;
 
 template<typename T>
@@ -26,10 +27,57 @@ public:
             }
             cout<<endl;
         }
+        cout<<endl;
         return;
     }
 
+    void Dijkstra_SSSP(T src){
+        unordered_map<T, int> dist;
+
+        //initially setting all distances to infinity
+        for(auto i: m){
+            dist[i.first] = INT_MAX;
+        }
+
+        //making a set to find out a node with the minimum distance
+        set<pair<int, T> > s;           //sorting in set is done on the basis of the first parameter
+
+        dist[src] = 0;
+        s.insert(make_pair(0, src));
+
+        while(!s.empty()){
+            //find the pair at the front
+            auto p = *(s.begin());
+            T node = p.second;
+
+            int node_dist = p.first;
+            s.erase(s.begin());
+
+            //iterate over the neighbours/children of the current node
+            for(auto child_pair: m[node]){
+                if(node_dist + child_pair.second < dist[child_pair.first]){
+                    //In a set, updation of a particular node is not possible,
+                    //we have to remove the old pair and insert the new pair to do simultaneous updation
+                    T dest = child_pair.first;
+                    auto f = s.find(make_pair(dist[dest], dest));
+                    if(f != s.end()){                //if f is found in the set
+                        s.erase(f);
+                    }
+
+                    //Insert the new pair
+                    dist[dest] = node_dist + child_pair.second;
+                    s.insert(make_pair(dist[dest], dest));
+                }
+            }
+        }
+        //Print distance to all other nodes from source
+        for(auto d: dist){
+            cout<<d.first<<" is located at a minimum distance of "<<d.second<<" from "<<src<<endl;
+        }
+        return;
+    }
 };
+
 
 int main(){
 //    Graph<int> g;
@@ -51,6 +99,8 @@ int main(){
     g1.add_edge("Mumbai", "Bhopal", 3);
 
     g1.print_adjList();
+    cout<<endl;
+    g1.Dijkstra_SSSP("Amritsar");
 
     return 0;
 }
