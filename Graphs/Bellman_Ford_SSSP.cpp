@@ -3,6 +3,18 @@ using namespace std;
 
 #define inf INT_MAX
 
+/*
+5 8
+0 1 -1
+0 2 4
+1 2 3
+3 2 5
+4 3 -3
+1 4 2
+1 3 2
+3 1 1
+*/
+
 class Edge{
 public:
     int src, dest, weight;
@@ -36,11 +48,12 @@ public:
 
         dist[src] = 0;
 
-        for(int i=0; i<=V-1; i++){
+        //Relaxation Code
+        for(int i=1; i<=V-1; i++){
             for(int j=0; j<E; j++){
                 int src = edge[j].src;
-                int dest = edge[i].dest;
-                int wt = edge[i].weight;
+                int dest = edge[j].dest;
+                int wt = edge[j].weight;
 
                 if(dist[src] != inf and (dist[src] + wt < dist[dest])){
                     dist[dest] = dist[src] + wt;
@@ -49,20 +62,23 @@ public:
             }
         }
 
-            for(int j=0; j<E; j++){
-                int src = edge[j].src;
-                int dest = edge[j].dest;
-                int wt = edge[j].weight;
-
-                if(dist[src] != inf and (dist[src] + wt < dist[dest])){
-                    cout<<"Negative Cycle Present"<<endl;
-                    return;
-                }
+        //Negative Cycle check
+        for(int j=0; j<E; j++){
+            int src = edge[j].src;
+            int dest = edge[j].dest;
+            int wt = edge[j].weight;
+            if(dist[src] != inf and (dist[src] + wt < dist[dest])){
+                cout<<"Negative Cycle Present"<<endl;
+                return;
             }
+        }
 
-
+        //Printing the distances
+        for(int i=0; i<V; i++){
+            cout<<"Distance of "<<i<<" from "<<src<<" is "<<dist[i]<<endl;
+        }
+        return;
     }
-
 };
 
 int main(){
