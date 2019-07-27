@@ -102,6 +102,22 @@ int main(){
     for(int v=0; v<V; v++)
         capacity[v] = new int[V];
 
+//    V = 6;
+//    int graph[V][V] = { {0, 16, 13, 0, 0, 0},
+//                        {0, 0, 10, 12, 0, 0},
+//                        {0, 4, 0, 0, 14, 0},
+//                        {0, 0, 9, 0, 0, 20},
+//                        {0, 0, 0, 7, 0, 4},
+//                        {0, 0, 0, 0, 0, 0}
+//                      };
+//
+//
+//
+//    for(int i=0; i<V; i++){
+//        for(int j=0; j<V; j++){
+//        capacity[i] = graph[i];
+//    }
+
     for(int e=0; e<E; e++){
         int u, v, c;
         cin>>u>>v>>c;
@@ -110,7 +126,7 @@ int main(){
     }
 
     int src = 0;
-    int sink = 1;
+    int sink = 5;
 
     cout<<max_flow(capacity, src, sink, V)<<endl;
 
