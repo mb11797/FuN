@@ -67,7 +67,8 @@ void Graph :: BFS_single_source_shortest_path(ll src){
         q.pop();
 
         for(auto neighbour: m[node]){
-            if(visited[neighbour.first] == false && (dist[node] + neighbour.second < dist[neighbour.first])){
+//            if(visited[neighbour.first] == false && (dist[node] + neighbour.second < dist[neighbour.first])){
+            if(dist[neighbour.first]==inf){                         //both conditions will work
                 dist[neighbour.first] = dist[node] + neighbour.second;
                 q.push(neighbour.first);
                 visited[neighbour.first] = true;
