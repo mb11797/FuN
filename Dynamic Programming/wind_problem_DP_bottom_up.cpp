@@ -1,10 +1,10 @@
 #include<iostream>
-#include<algorithm>
 #include<cstring>
 using namespace std;
+int memo[100][100];
 int cnt1 = 0;
 int cnt2 = 0;
-int memo[100][100];
+
 
 int max_profit(int*bottle_prices, int be, int en, int year){
     cnt1++;
@@ -33,25 +33,49 @@ int max_profit_memoization(int*bottle_prices, int be, int en, int year){
     return memo[be][en];
 }
 
+int max_profit_BottomUp(int*bottle_prices, int n){
+    int dp[100][100] = {};
+
+    int year = n;
+
+    for(int i=0; i<n; i++)
+        dp[i][i] = bottle_prices[i]*year;
+
+    year--;
+
+    for(int len=2; len<=n; len++){
+        int strt = 0;
+        int end = n-len;
+
+        while(strt<=end){
+            int endWindow = strt+len-1;
+            dp[strt][endWindow] = max(bottle_prices[strt]*year + dp[strt+1][endWindow], bottle_prices[endWindow]*year + dp[strt][endWindow-1]);
+            strt++;
+        }
+        year--;
+    }
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++)
+            cout<<dp[i][j]<<"\t";
+        cout<<endl;
+    }
+
+    return dp[0][n-1];
+}
+
 int main(){
     int n;
     cin>>n;
 
     int bottle_prices[n];
-    for(int i=0; i<n; i++)
-        cin>>bottle_prices[i];
-
-
-//    for(int i=0; i<n; i++)
-//        for(int j=0; j<n; j++)
-//            memo[i][j] = -1;
 
     memset(memo, -1, sizeof(memo));
 
-    cout<<max_profit(bottle_prices, 0, n-1, 1)<<endl;
-    cout<<"Calls: "<<cnt1<<endl;
-    cout<<max_profit_memoization(bottle_prices, 0, n-1, 1)<<endl;
-    cout<<"Calls: "<<cnt2<<endl;
+    for(int i=0; i<n; i++)
+        cin>>bottle_prices[i];
+
+    cout<<max_profit_BottomUp(bottle_prices, n)<<endl;
 
     return 0;
 }
