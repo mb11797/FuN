@@ -1,23 +1,19 @@
 #include<iostream>
 #include<algorithm>
 using namespace std;
-int memo[100];
-
 
 int max_profit(int price_of_each_len[100], int total_len){
-    if(total_len==0)
-        return 0;
+    int dp[100] = {};
 
-    if(memo[total_len] != -1)
-        return memo[total_len];
 
-    int best=0;
     for(int len=1; len<=total_len; len++){
-        int net_profit = price_of_each_len[len] + max_profit(price_of_each_len, total_len-len);
-        best = max(best, net_profit);
+        int best=0;
+        for(int cut=1; cut<=len; cut++){
+            best = max(best, price_of_each_len[cut] + dp[len-cut]);
+        }
+        dp[len] = best;
     }
-    memo[total_len] = best;
-    return best;
+    return dp[total_len];
 }
 
 int main(){
@@ -27,9 +23,6 @@ int main(){
 
     for(int piece=1; piece<=total_len; piece++)
         cin>>price_of_each_len[piece];
-
-    //reset memopad
-    fill(memo, memo+total_len+1, -1);
 
     cout<<max_profit(price_of_each_len, total_len);
 
