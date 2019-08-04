@@ -4,7 +4,7 @@ using namespace std;
 int memo[100][100];
 int cnt1 = 0;
 int cnt2 = 0;
-
+int cnt3 = 0;
 
 int max_profit(int*bottle_prices, int be, int en, int year){
     cnt1++;
@@ -38,9 +38,10 @@ int max_profit_BottomUp(int*bottle_prices, int n){
 
     int year = n;
 
-    for(int i=0; i<n; i++)
+    for(int i=0; i<n; i++){
         dp[i][i] = bottle_prices[i]*year;
-
+        cnt3++;
+    }
     year--;
 
     for(int len=2; len<=n; len++){
@@ -48,6 +49,7 @@ int max_profit_BottomUp(int*bottle_prices, int n){
         int end = n-len;
 
         while(strt<=end){
+            cnt3++;
             int endWindow = strt+len-1;
             dp[strt][endWindow] = max(bottle_prices[strt]*year + dp[strt+1][endWindow], bottle_prices[endWindow]*year + dp[strt][endWindow-1]);
             strt++;
@@ -75,7 +77,13 @@ int main(){
     for(int i=0; i<n; i++)
         cin>>bottle_prices[i];
 
+    cout<<max_profit(bottle_prices, 0, n-1, 1)<<endl;
+    cout<<"Calls: "<<cnt1<<endl;
+    cout<<max_profit_memoization(bottle_prices, 0, n-1, 1)<<endl;
+    cout<<"Calls: "<<cnt2<<endl;
+
     cout<<max_profit_BottomUp(bottle_prices, n)<<endl;
+    cout<<"Calls: "<<cnt3<<endl;
 
     return 0;
 }
