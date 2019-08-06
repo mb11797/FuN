@@ -12,7 +12,7 @@ int edit_dist_min_oprns(char inp[100], char out[100]){
     for(int i=1; i<=n; i++)
         dp[0][i] = 1 + dp[0][i-1];          //insertion
 
-    for(int j=0; j<=m; j++)
+    for(int j=1; j<=m; j++)
         dp[j][0] = 1 + dp[j-1][0];          //deletion
 
     for(int i=1; i<=m; i++){

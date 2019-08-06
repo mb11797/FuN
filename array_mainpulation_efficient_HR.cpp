@@ -2,23 +2,25 @@
 using namespace std;
 
 int array_manip(int n, int q[100][3]){
-    int arr[n] = {0};
+    int arr[n+2] = {0};
     for(int i=0; i<3; i++){
-        int s = q[i][0]-1;
-        int e = q[i][1]-1;
-        int add = q[i][2];
-        for(int j=s; j<=e; j++){
-            arr[j] += add;
-        }
+        int s = q[i][0];
+        int e = q[i][1];
+        int k = q[i][2];
+
+        arr[s] += k;
+        arr[e+1] -= k;
+
     }
 
+    long mx = INT_MIN;
+    long sum = 0;
 
-
-    int mx = -1;
-    for(int i=0; i<n; i++){
+    for(long i=0; i<n+2; i++){
+        sum += arr[i];
+        arr[i] = sum;
+        mx = max(mx, sum);
         cout<<arr[i]<<" ";
-        if(arr[i] > mx)
-            mx = arr[i];
     }
     cout<<endl;
     return mx;
@@ -38,4 +40,3 @@ int main(){
 
     return 0;
 }
-
