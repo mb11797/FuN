@@ -1,12 +1,14 @@
 #include<iostream>
 using namespace std;
 
+#define ll long long
+
 int main(){
-    int tc;
+    ll tc;
     cin>>tc;
 
     while(tc--){
-        int n, k;
+        ll n, k;
         cin>>n>>k;
 
         //1st candidate will always have uniform distribution in each box
