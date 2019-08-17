@@ -23,7 +23,7 @@ ll k_ordered_lcs(ll i, ll j, ll k){
     }
     else{
         if(k>0){
-            res = 1 + k_ordered_lcs(i+1, j+1, k-1);
+            res = 1 + k_ordered_lcs(i+1, j+1, k-1);             // we have converted a single character to match with jth of string b
         }
 
         res = max(res, k_ordered_lcs(i, j+1, k));
