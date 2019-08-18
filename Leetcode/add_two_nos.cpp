@@ -26,8 +26,12 @@ public:
             prev_carry = s / 10;
             temp->next = sum;
             sum = temp;
-            l1 = l1->next;
-            l2 = l2->next;
+            if(l1 != NULL){
+                l1 = l1->next;
+            }
+            if(l2 != NULL){
+                l2 = l2->next;
+            }
         }
 
         if(prev_carry != 0){
