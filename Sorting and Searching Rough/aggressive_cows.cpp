@@ -9,11 +9,11 @@ bool is_Answer(long long int *arr,long long int n,long long int ans){
             prev=arr[i];
             ca++;
             if(ca==c)
-            return true;
+                return true;
         }
     }
     if(ca<c)
-    return false;
+        return false;
     return true;
 }
 
@@ -34,7 +34,7 @@ int main() {
             si=mid+1;
         }
         else
-        ei=mid-1;
+            ei=mid-1;
     }
     cout<<ans<<endl;
 	return 0;
