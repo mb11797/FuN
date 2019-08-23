@@ -4,7 +4,7 @@ using namespace std;
 //#define INT_MAX 999999
 
 int n=4;
-int dp[16][4];
+int dp[16][4];                  //no of possible states(due to mask)=2^n        positions can be equal to no of cities, i.e, no of bits
 //Adjacency matrix which defines the graph
 int dist[10][10] = {
                     {0, 20, 42, 25},
@@ -45,7 +45,7 @@ int main(){
         }
     }
     //starting from city 1, i.e. mask=1 initially
-    cout<<tsp(1, 0)<<endl;
+    cout<<"Min. weight Hamiltonian path costs "<<tsp(1, 0)<<endl;
 
     return 0;
 }
