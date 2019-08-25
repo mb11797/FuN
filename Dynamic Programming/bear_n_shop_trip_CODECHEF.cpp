@@ -16,7 +16,8 @@ ld dist[N][N] = {0};
 
 //n is the no of shops except kitchen and k is the no of ingredients needed
 int n, k;
-
+vector<pair<int, int>> coordinates;
+vector<int>ingredients;
 
 
 int main(){
@@ -24,6 +25,11 @@ int main(){
     cin>>tc;
 
     while(tc--){
+        coordinates.clear();
+        ingredients.clear();
+
+        cin>>n>>k;
+
 
 
 
