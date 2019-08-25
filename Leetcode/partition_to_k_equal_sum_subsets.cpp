@@ -9,8 +9,8 @@ bool canPartitionKSubsets(vector<int>& nums, int k) {
     int n = nums.size();
     int sum;
     for(int i=0; i<(1<<n); i++){
+        sum=0;
         for(int j=0; j<n; j++){
-            sum=0;
             if(i&(1<<j)){
                 sum += nums[j];
             }
