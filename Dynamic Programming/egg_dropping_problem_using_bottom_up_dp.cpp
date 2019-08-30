@@ -24,7 +24,7 @@ int min_trials_in_worst_case(int nf, int ne){
         for(int j=2; j<=nf; j++){
             dp[i][j] = INT_MAX;
             for(int x=1; x<=j; x++){
-                dp[i][j] = min(dp[i][j], 1+max(dp[i-1][x-1], dp[i][j-x]));
+                dp[i][j] = min(dp[i][j], 1 + max(dp[i-1][x-1], dp[i][j-x]));              //max(if egg breaks, if egg does not break)
             }
         }
     }
