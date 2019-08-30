@@ -2,7 +2,7 @@
 #include<cstring>
 using namespace  std;
 
-int memo[1000][1000];
+int memo[1000][1000];               //(n_eggs, n_floors)
 
 int min_trials_in_worst_case(int nf, int ne){
     if(nf==0 || nf==1)
