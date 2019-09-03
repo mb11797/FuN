@@ -22,9 +22,9 @@ ll f(ll n){
 
 int main(){
     F[0] = F[1] = 1;
-    int n;
+    ll n;
     cin>>n;
 
-    cout<<f(n)<<endl;
+    cout<<((n==0) ? 0 : f(n-1))<<endl;
     return 0;
 }
