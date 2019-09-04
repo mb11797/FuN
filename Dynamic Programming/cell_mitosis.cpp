@@ -1,6 +1,10 @@
 #include<iostream>
 using namespace std;
 
+//x - doubling_cost
+//y - increment_cost
+//z - decrement_cost
+
 long long solve_cell_mitosis(int n, int x, int y, int z){
     long long *dp = new long long[n+1];
 
@@ -25,8 +29,8 @@ long long solve_cell_mitosis(int n, int x, int y, int z){
 int main(){
     int n, x, y, z;
 
-    cin>>n;
     cin>>x>>y>>z;
+    cin>>n;
 
     cout<<solve_cell_mitosis(n, x, y, z)<<endl;
 
