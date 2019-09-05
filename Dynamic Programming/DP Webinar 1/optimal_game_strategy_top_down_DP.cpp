@@ -2,7 +2,7 @@
 #include<cstring>
 using namespace std;
 
-int arr[10000];
+int arr[100];
 int n;
 int memo[100][100];
 
