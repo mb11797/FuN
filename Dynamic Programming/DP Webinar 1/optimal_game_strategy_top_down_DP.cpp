@@ -1,8 +1,10 @@
 #include<iostream>
+#include<cstring>
 using namespace std;
 
-int arr[1000];
+int arr[10000];
 int n;
+int memo[100][100];
 
 int max_score_of_Modi_ji(int be, int en){
     if(be > en){
@@ -13,13 +15,18 @@ int max_score_of_Modi_ji(int be, int en){
         return max(arr[be], arr[en]);
     }
 
+    if(memo[be][en] != -1){
+        return memo[be][en];
+    }
+
     int modi_pick_beg = arr[be] + min(max_score_of_Modi_ji(be+2, en), max_score_of_Modi_ji(be+1, en-1));
     int modi_pick_end = arr[en] + min(max_score_of_Modi_ji(be+1, en-1), max_score_of_Modi_ji(be, en-2));
 
-    return max(modi_pick_beg, modi_pick_end);
+    return memo[be][en] = max(modi_pick_beg, modi_pick_end);
 }
 
 int main(){
+    memset(memo, -1, sizeof(memo));
     cin>>n;
 
     int total_sum=0;
