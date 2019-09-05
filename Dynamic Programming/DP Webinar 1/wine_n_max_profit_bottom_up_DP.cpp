@@ -13,12 +13,12 @@ ll max_profit(ll n){
         dp[i][i] = n*wines[i];
     }
 
+    ll yr=n-1;
     for(ll be=0; be<n-1; be++){
-        ll yr=1;
         for(ll en=be+1; en<n; en++){
             dp[be][en] = max(wines[be]*yr + dp[be+1][en], wines[en]*yr + dp[be][en-1]);
-            yr++;
         }
+        yr--;
     }
     return dp[0][n-1];
 }
