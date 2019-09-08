@@ -15,7 +15,7 @@ int max_area_rectangle(int rows, int cols){
                 s.push(arr[r][c], c);
             }
             else{
-                max_area = max(max_area, )
+                max_area = max(max_area, s.top().first * )
             }
         }
     }

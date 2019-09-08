@@ -3,13 +3,15 @@
 using namespace std;
 
 int main(){
-    int n=8;
+    int n;
+//    int n=8;
     cin>>n;
 //    int n = 8;
     stack<int> s;
 //    int hist[n] = {6,2,5,4,5,1,6};
 
-    int hist[n] = {2,4,5,6,6,5,4,2};
+//    int hist[n] = {2,4,5,6,6,5,4,2};
+    int hist[n];
     for(int p=0; p<n; p++){
         cin>>hist[p];
     }
