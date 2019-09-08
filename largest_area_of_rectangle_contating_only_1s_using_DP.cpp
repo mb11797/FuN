@@ -5,20 +5,49 @@ using namespace std;
 int arr[100][100];
 
 int max_area_rectangle(int rows, int cols){
-    stack<pair<int, int>> s;
+    stack<int> s;
 
+    int r, c;
     int max_area=0;
-    for(int r=0; r<rows; r++){
-        s.push(arr[r][0], 0);
-        for(int c=0; c<cols; c++){
-            if(arr[r][c] > s.top().first){
-                s.push(arr[r][c], c);
+    for(r=0; r<rows; r++){
+        for(c=0; c<cols; c++){
+            if(!s.empty()){
+                if(arr[r][c] < arr[r][s.top()]){
+                    while(arr[r][c] < arr[r][s.top()]){
+                        int temp = arr[r][s.top()];
+                        s.pop();
+                        if(s.empty()){
+                            max_area = max(max_area, temp*c);
+                            break;
+                        }
+                        else{
+                            max_area = max(max_area, temp*(c - s.top() - 1));
+                        }
+                    }
+                    s.push(c);
+                }
+                else{
+                    s.push(c);
+                }
             }
             else{
-                max_area = max(max_area, s.top().first * )
+                s.push(c);
             }
         }
+        while(!s.empty()){
+            int temp = arr[r][s.top()];
+            s.pop();
+            if(s.empty()){
+                max_area = max(max_area, temp*c);
+                break;
+            }
+            else{
+                max_area = max(max_area, temp*(c - s.top() - 1));
+            }
+        }
+
     }
+    return max_area;
 }
 
 int main(){
