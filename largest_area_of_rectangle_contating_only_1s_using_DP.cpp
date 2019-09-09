@@ -46,6 +46,18 @@ int max_area_rectangle(int rows, int cols){
             }
         }
 
+        //updating the histogram considering second row
+        if(r < rows-1){
+            for(int c=0; c<cols; c++){
+                if(arr[r+1][c] == 0){
+                    arr[r+1][c] = 0;
+                }
+                else{
+                    arr[r+1][c] += arr[r][c];
+                }
+            }
+        }
+
     }
     return max_area;
 }
