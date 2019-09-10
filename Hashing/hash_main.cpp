@@ -15,6 +15,9 @@ int main(){
     h.insert("Chiku", 120);
 
     h.print();
+    cout<<h.search("Guava")<<endl;
+    cout<<h.search("Chiku")<<endl;
+    cout<<h.search("Banana")<<endl;
 
     return 0;
 }

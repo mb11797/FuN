@@ -71,4 +71,17 @@ public:
             cout<<endl;
         }
     }
+
+    T search(string key){
+        for(int i=0; i<ts; i++){
+            node<T>*temp = buckets[i];
+            while(temp!=NULL){
+                if(temp->key == key){
+                    return temp->value;
+                }
+                temp = temp->next;
+            }
+        }
+        return -1;
+    }
 };
