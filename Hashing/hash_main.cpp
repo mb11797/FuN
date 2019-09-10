@@ -13,11 +13,27 @@ int main(){
     h.insert("Guava", 140);
     h.insert("Banana", 130);
     h.insert("Chiku", 120);
+    h.insert("Grapes", 200);
+    h.insert("Lichi", 160);
+    h.insert("Orange", 150);
 
     h.print();
-    cout<<h.search("Guava")<<endl;
-    cout<<h.search("Chiku")<<endl;
-    cout<<h.search("Banana")<<endl;
 
+    cout<<endl;
+
+    string f;
+    cin>>f;
+
+    int*price = h.search(f);
+    if(price==NULL)
+        cout<<"Not Found!!!"<<endl;
+    else
+        cout<<"Price is "<<*price<<endl;
+
+    cout<<endl;
+
+    h.erase(f);
+//    h.erase("Chiku");
+    h.print();
     return 0;
 }

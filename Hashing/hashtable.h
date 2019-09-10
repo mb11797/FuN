@@ -72,16 +72,43 @@ public:
         }
     }
 
-    T search(string key){
-        for(int i=0; i<ts; i++){
-            node<T>*temp = buckets[i];
-            while(temp!=NULL){
-                if(temp->key == key){
-                    return temp->value;
-                }
-                temp = temp->next;
+    T* search(string key){
+        int i = hashFn(key);
+        node<T>*temp = buckets[i];
+        while(temp!=NULL){
+            if(temp->key == key){
+                return &(temp->value);          //bcz return type is an address
             }
+            temp = temp->next;
         }
-        return -1;
+        //What if key is not found? T can Fruit or string or int or Book, etc anything
+        return NULL;
     }
+
+    void erase(string key){
+        int i = hashFn(key);
+        node<T>*temp = buckets[i];
+        node<T>*prev = buckets[i];
+        if(temp->key == key){
+            buckets[i] = temp->next;
+            delete temp;
+            return;
+        }
+        prev = temp;
+        temp = temp->next;
+        while(temp != NULL){
+//            cout<<"1"<<endl;
+            if(temp->key == key){
+//                cout<<"INSIDE"<<endl;
+                prev->next = temp->next;
+                break;
+            }
+            prev = temp;
+//            cout<<"2"<<endl;
+            temp = temp->next;
+        };
+        delete temp;
+        return;
+    }
+
 };
