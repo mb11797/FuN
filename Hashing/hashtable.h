@@ -63,7 +63,7 @@ public:
         for(int i=0; i<ts; i++){
             //print the linked list for each bucket
             node<T>*temp = buckets[i];
-            cout<<"Bucket "<<i<<endl;
+            cout<<"Bucket "<<i<<"->";
             while(temp != NULL){
                 cout<<"("<<temp->key<<", "<<temp->value<<")"<<", ";
                 temp = temp->next;
