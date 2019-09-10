@@ -5,7 +5,7 @@ using namespace std;
 int main(){
     //Fruit, 100     key = string, price = int
 
-    Hashtable<int> h;
+    Hashtable<int> h(7);
 //    Hashtable<int> h(11);
 
     h.insert("Mango", 100);

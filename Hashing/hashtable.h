@@ -13,6 +13,13 @@ public:
         this->key = key;
         value = v;
     }
+
+    //Recursive destructor
+    ~node(){
+        if(next != NULL){
+            delete next;
+        }
+    }
 };
 
 template<typename T>
@@ -35,6 +42,34 @@ class Hashtable{
         return ans;
     }
 
+    void rehash(){
+        node<T>** old_buckets = buckets;
+        int old_ts = ts;
+        ts = ts*2 + 1;
+        cs = 0;
+
+        buckets = new node<T>*[ts];
+        for(int i=0; i<ts; i++){
+            buckets[i] = NULL;
+        }
+
+        //Read the elements from old table and insert them in new table
+        for(int i=0; i<old_ts; i++){
+            node<T>*temp = old_buckets[i];
+
+            if(temp != NULL){
+                while(temp != NULL){
+                    insert(temp->key, temp->value);
+                    temp = temp->next;
+                }
+                //delete the old_bucket's ith bucket linked list
+                delete old_buckets[i];          //for this to work, we have to write the recursive destructor in node class
+            }
+        }
+        delete [] old_buckets;
+        return;
+    }
+
 public:
     Hashtable(int ds = 7){
         cs = 0;
@@ -54,6 +89,15 @@ public:
         node<T>*n = new node<T>(key, value);
         n->next = buckets[i];
         buckets[i] = n;
+
+        cs++;
+
+        float load_factor = (float) cs/ts;
+        if(load_factor > 0.7){
+            cout<<"Load Factor is: "<<load_factor<<endl;
+            rehash();
+        }
+
         return;
     }
 
