@@ -45,7 +45,7 @@ class Hashtable{
     void rehash(){
         node<T>** old_buckets = buckets;
         int old_ts = ts;
-        ts = ts*2 + 1;
+        ts = ts*2 + 1;          //try choosing a prime no bigger than twice the ts
         cs = 0;
 
         buckets = new node<T>*[ts];
@@ -66,7 +66,7 @@ class Hashtable{
                 delete old_buckets[i];          //for this to work, we have to write the recursive destructor in node class
             }
         }
-        delete [] old_buckets;
+        delete [] old_buckets;          //array deletion syntax
         return;
     }
 
