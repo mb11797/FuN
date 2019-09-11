@@ -20,6 +20,7 @@ int main(){
 
     //Print
     //M-1
+    cout<<"PRINT: "<<endl;
     for(auto node: my_map){
         cout<<node.first<<", "<<node.second<<endl;
     }
@@ -30,6 +31,21 @@ int main(){
     for(pair<string, int> node: my_map){
         cout<<node.first<<", "<<node.second<<endl;
     }
+
+    cout<<endl;
+
+    //Buckets Iterate
+    cout<<"PRINTING ALL BUCKETS, i.e, HASHTABLE: "<<endl;
+    for(int i=0; i<my_map.bucket_count(); i++){
+        //Iterate over every linked list
+        cout<<"Bucket "<<i<<"-->";
+        for(auto it = my_map.begin(i); it != my_map.end(i); it++){
+            //it is a pointer to a pair
+            cout<<it->first<<", "<<it->second<<" ";
+        }
+        cout<<endl;
+    }
+
 
     return 0;
 }
