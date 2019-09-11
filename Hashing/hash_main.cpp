@@ -35,5 +35,17 @@ int main(){
     h.erase(f);
 //    h.erase("Chiku");
     h.print();
+
+    h["Pineapple"] = 350;
+    h["Grapes"] = 500;
+
+    h.print();
+    cout<<endl;
+
+    cout<<h["Pineapple"]<<endl;
+    cout<<h["Grapes"]<<endl;
+    cout<<h["Banana"]<<endl;
+
+
     return 0;
 }

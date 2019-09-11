@@ -155,4 +155,18 @@ public:
         return;
     }
 
+    T& operator[](string key){
+        T*temp = search(key);
+        if(temp == NULL){
+            //Insertion
+            T garbage;
+            insert(key, garbage);
+
+            T*value = search(key);
+            return *value;
+        }
+
+        //else return the box (update/search functionality)
+        return *temp;
+    }
 };
