@@ -6,8 +6,7 @@ int main()
 				"TNn*RPn/QPbEWS_JSWQAIJO^NBELPeHBFHT}TnALVlBL"
 				"OFAkHFOuFETpHCStHAUFAgcEAelclcn^r^r\\tZvYxXyT|S~Pn SPm "
 				"SOn TNn ULo0ULo#ULo-WHq!WFs XDt!";
-	while (a != 0)
-	{
+	while (a != 0){
 	a = str[b++];
 		while (a-- > 64)
 		{
