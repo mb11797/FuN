@@ -1,43 +1,68 @@
 #include<iostream>
 using namespace std;
 
+#define ll long long
+ll cycle = 0;
+
 class node{
 public:
-    int data;
+    ll data;
     node*next;
 
-    node(int d){
+    node(ll d){
         data = d;
         next = NULL;
     }
 };
 
-void insertAtHead(node*&head, int data){
-    if(head==NULL){
-        head = new node(data);
+void add_to_back(node*&head, node*node_to_add){
+    int flag = 0;
+    if(head == NULL){
+        head = node_to_add;
         return;
     }
-    node*n = new node(data);
-    n->next = head;
-    head = n;
+
+    node*temp = head;
+
+    node*cycle_pt;
+    while(temp->next != NULL){
+        if(temp->data == node_to_add->data){
+            cycle_pt = temp;
+            flag = 1;
+        }
+        temp = temp->next;
+    }
+    if(flag == 0){
+        temp->next = node_to_add;
+    }
+    else{
+        temp->next = cycle_pt;
+        cycle = 1;
+    }
     return;
 }
 
-void insertAtTail(node*&head, int data){
-    if(head==NULL){
-        insertAtHead(head, data);
-        return;
+node*take_input(){
+    int data;
+
+    node*head = NULL;
+
+    while(cin>>data && data != -1){
+        if(cycle == 1){
+            break;
+        }
+        node*node_to_add = new node(data);
+        add_to_back(head, node_to_add);
     }
-    node*tail = head;
-    while(tail->next!=NULL){
-        tail = tail->next;
+
+    if(cycle == 1 && data != -1){
+        while(cin>>data && data != -1);
     }
-    tail->next = new node(data);
-    return;
+    return head;
 }
 
 void print(node*head){
-    while(head!=NULL){
+    while(head != NULL){
         cout<<head->data<<" ";
         head = head->next;
     }
@@ -45,40 +70,64 @@ void print(node*head){
     return;
 }
 
-int length(node*head){
-    int l=0;
-    while(head!=NULL){
-        l++;
-        head = head->next;
+bool detect_cycle(node*head){
+    node*slow = head;
+    node*fast = head;
+
+    while(fast != NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(fast == slow){
+            return true;
+        }
     }
-    return l;
+//    cout<<0<<endl;
+    return false;
 }
 
-void buildList(node*&head){
-    int data;
-    cin>>data;
-    while(data != -1){
-        insertAtTail(head, data);
-        cin>>data;
+void remove_cycle(node*&head){
+    node*slow = head;
+    node*fast = head;
+    while(fast->next != NULL && fast != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast){
+            break;
+        }
     }
+
+    if(slow == fast && fast == head){
+        node*prev = head->next;
+        while(prev->next != head){
+            prev = prev->next;
+        }
+        prev->next = NULL;
+        return;
+    }
+
+    slow = head;
+
+    while(slow->next != fast->next){
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    fast->next = NULL;
     return;
 }
 
-istream& operator>>(istream &is, node*&head){
-    buildList(head);
-    return is;
-}
-
-ostream& operator<<(ostream &os, node*head){
-    print(head);
-    return os;
-}
-
-
 int main(){
-    node*head = NULL;
-    cin>>head;
-    cout<<head;
+    node*head = take_input();
+//    print(head);
 
+    if(detect_cycle(head)){
+//        cout<<1<<endl;
+        remove_cycle(head);
+        print(head);
+    }
+    else{
+        cout<<2<<endl;
+        print(head);
+    }
     return 0;
 }
