@@ -35,6 +35,7 @@ int main(){
                             {1,9},
                             {23,34,90,200}
                             };
+
     vector<int> output = merge_k_arrays(arr);
     cout<<"Merged array is: "<<endl;
     for(auto x : output)

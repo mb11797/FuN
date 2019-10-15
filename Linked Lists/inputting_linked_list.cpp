@@ -47,6 +47,64 @@ void print(node*head){
         cout<<head->data<<"->";
         head = head->next;
     }
+    cout<<endl;
+    return;
+}
+
+int length(node*head){
+    int len = 0;
+    while(head != NULL){
+        head = head->next;
+        len++;
+    }
+    return len;
+}
+
+void deleteAtHead(node*&head){
+    if(head==NULL){
+        return;
+    }
+    node*temp = head;
+    head = head->next;
+    delete temp;
+    return;
+}
+
+void deleteAtTail(node*&head){
+    node*prev = NULL;
+    node*temp = head;
+    while(temp->next!=NULL){
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = NULL;
+    delete temp;
+    return;
+}
+
+void deleteInMiddle(node*&head, int p){
+    if(head==NULL)
+        return;
+    if(p==0){
+        deleteAtHead(head);
+    }
+    else if(p>length(head)){
+        deleteAtTail(head);
+    }
+    else{
+        int jump = 1;
+        node*prev = NULL;
+        node*temp = head;
+        while(jump<=p-1){
+            prev = temp;
+            temp = temp->next;
+            jump++;
+        }
+        prev->next = temp->next;
+        delete temp;
+        return;
+    }
+    return;
 }
 
 void buildList(node*&head){
@@ -63,6 +121,7 @@ int main(){
     node*head = NULL;
     buildList(head);
     print(head);
+
 
     return 0;
 }

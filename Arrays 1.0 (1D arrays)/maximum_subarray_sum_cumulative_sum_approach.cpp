@@ -34,7 +34,6 @@ int main(){
                 right = j;
             }
         }
-
     }
     cout<<"Maximum Sum : "<<maxSum<<endl<<"Sub Array : ";
     for(int k=left; k<=right; k++)
