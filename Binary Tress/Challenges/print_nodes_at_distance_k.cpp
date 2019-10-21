@@ -1,4 +1,5 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
 
 /*
@@ -7,6 +8,29 @@ Preorder: 8 10 1 6 9 7 3 14 13
 Inorder: 1 10 9 6 7 8 3 13 14
 */
 
+/*
+4
+60 65 50 70
+50 65 60 70
+2
+60 1
+65 2
+*/
+
+/*
+7
+20 8 4 12 10 14 22
+4 8 10 12 14 20 22
+5
+4 2
+12 3
+22 2
+8 1
+10 1
+*/
+
+int got = 0;
+int arr[1001];
 
 class node{
 public:
@@ -60,7 +84,8 @@ void print_nodes_at_dist_k_downwards(node*root, int k, int &status){
     }
 
     if(k==0){
-        cout<<root->data<<" ";
+//        cout<<root->data<<" ";
+        arr[got++] = root->data;
         status = 1;
     }
 
@@ -82,7 +107,8 @@ int print_nodes_at_dist_k(node*root, int target_data, int k, int &status){
     int dl = print_nodes_at_dist_k(root->left, target_data, k, status);
     if(dl != -1){
         if(dl + 1 == k){
-            cout<<root->data<<" ";
+//            cout<<root->data<<" ";
+            arr[got++] = root->data;
             status = 1;
         }else{
             print_nodes_at_dist_k_downwards(root->right, k-dl-2, status);
@@ -94,7 +120,8 @@ int print_nodes_at_dist_k(node*root, int target_data, int k, int &status){
     int dr = print_nodes_at_dist_k(root->right, target_data, k, status);
     if(dr != -1){
         if(dr + 1 == k){
-            cout<<root->data<<" ";
+//            cout<<root->data<<" ";
+            arr[got++] = root->data;
             status = 1;
         }else{
             print_nodes_at_dist_k_downwards(root->left, k-dr-2, status);
@@ -133,7 +160,13 @@ int main(){
         if(status == 0){
             cout<<0;
         }
+        else{
+            sort(arr, arr+got);
+            for(int i=0; i<got; i++)
+                cout<<arr[i]<<" ";
+        }
         cout<<endl;
+        got = 0;
     }
 
     return 0;
