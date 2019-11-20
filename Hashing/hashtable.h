@@ -17,7 +17,7 @@ public:
     //Recursive destructor
     ~node(){
         if(next != NULL){
-            delete next;
+            delete next;        ///recursive call to the destructor again and again 
         }
     }
 };
@@ -144,7 +144,7 @@ public:
 //            cout<<"1"<<endl;
             if(temp->key == key){
 //                cout<<"INSIDE"<<endl;
-                prev->next = temp->next;
+                prev->next = temp->next;  
                 break;
             }
             prev = temp;

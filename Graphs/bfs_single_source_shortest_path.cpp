@@ -2,6 +2,8 @@
 #include<map>
 #include<list>
 #include<queue>
+#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 
@@ -55,7 +57,7 @@ public:
         }
     }
 
-    void bfs_shortest_path(T src){
+    void bfs_shortest_path(T src, T dest){
     queue<T> q;
     map<T, int> dist;
     map<T, T> parent;
@@ -87,6 +89,22 @@ public:
         T node = i.first;
         cout<<"Dist of "<<node<<" from "<<src<<" is "<<dist[node]<<endl;
     }
+
+    ///Path print
+    vector<T> path;
+    T temp = dest;
+    while(temp != src){
+        path.push_back(temp);
+        temp = parent[temp];
+    }
+    path.push_back(src);
+
+    reverse(path.begin(), path.end());
+
+    for(auto i: path){
+        cout<<i<<"->";
+    }
+    cout<<endl;
 }
 };
 
@@ -107,7 +125,7 @@ int main(){
     g.bfs(0);
     cout<<endl;
 
-    g.bfs_shortest_path(0);
+    g.bfs_shortest_path(0, 5);
 
     return 0;
 }
