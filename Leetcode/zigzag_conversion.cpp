@@ -91,8 +91,8 @@ string convert(string s, int numRows){
 int main(){
     int n;
     cin>>n;
-//    cout<<convert("PAYPALISHIRING", n)<<endl;
-    cout<<convert("Apalindromeisaword,phrase,number,orothersequenceofunitsthatcanbereadthesamewayineitherdirection,withgeneralallowancesforadjustmentstopunctuationandworddividers.", n)<<endl;
+    cout<<convert("PAYPALISHIRING", n)<<endl;
+    //cout<<convert("Apalindromeisaword,phrase,number,orothersequenceofunitsthatcanbereadthesamewayineitherdirection,withgeneralallowancesforadjustmentstopunctuationandworddividers.", //n)<<endl;
 //    cout<<"1\0 23"<<endl;
     return 0;
 }
