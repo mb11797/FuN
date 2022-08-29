@@ -6,7 +6,7 @@ using namespace std;
 void subse(string str,string osf,string* strk,int &c){
     if(str.length()==0){
         strk[c] = osf;
-    c++;
+        c++;
         return ;
     }
     char a = str[0];

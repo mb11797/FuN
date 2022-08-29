@@ -1,0 +1,221 @@
+
+
+
+h-> 1->2->3->4->Null
+
+5 4 3 2 1
+
+arr = [1,2,3,4,5]
+
+
+public class Node{
+	int data;
+	Node next;
+
+	NOde(int data){
+		this.data = data;
+		this.next = null;
+	}
+}
+
+
+public Node reverse(Node head){
+	if(head.next == null)
+		return head;
+
+	Node revHead = reverse(head.next);
+
+	head.next.next = head;
+	head.next = null;
+
+	return revHead;
+}
+
+revHead = 4
+1->2->3(->null)<-4<-revHead
+1->2(->null)<-3<-4<-revHead
+
+
+
+temp = head
+while(temp != null)
+
+
+		1 
+	2         5
+3       4   6   7
+
+dist(3,6) = 
+
+
+public class Node{
+	int data;
+	Node left, right;
+
+}
+
+int findDist(Node root, Node a, Node b){
+	// find LCA
+	Node lca = findLCA(root, a, b);
+
+	// find distances between nodes
+	int d1 = dist(lca, a);
+	int d2 = dist(lca, b);
+
+	return d1 + d2;
+}
+
+
+int dist(Node src, Node dest){
+	if(src == null)
+		return -1;
+
+	if(src.data == dest.data){
+		return 0;	
+	}
+
+	int left = dist(src.left, dest);
+
+	if(left != -1){
+		return left + 1;
+	}
+
+	int right = dist(src.right, dest);
+
+	if(right != -1)
+		return right+1;
+
+	return -1;
+}
+
+Node findLCA(Node root, Node a, Node b){
+	if(root == null)
+		return null;
+
+	if(root.data == a.data){
+		return root;
+	}
+
+	if(root.data == b.data)
+		return root;
+	
+	Node leftAns = findLCA(root.left, a, b);
+	Node rightAns = findLCA(root.right, a, b);
+
+	if(leftAns != null && rightAns != null)
+		return root;
+
+	return (leftAns ! null) ? leftAns : rightAns;
+}
+
+
+
+
+LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4. 
+
+LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4. 
+
+LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4.
+
+
+
+str1[i] == str2[j]
+
+lcs(){
+	int[][] dp = new int[a.length()+1][b.length()+1];
+	for(int[] row: dp){
+		Arrays.fill(row, -1);
+	}
+	int maxLen = lcsUtil¸(a, b, 0, 0, dp);
+}
+
+int lcsUtil(String a, String b, int idxA, int idxB, int[][] dp){
+	if(idxA == a.length()  || idxB == b.length()){
+		return dp[idxA][idxB] = 0;
+	}
+
+	if(dp[idxA][idxB] != -1){
+		return dp[idxA][idxB];
+	}
+
+	int ans = 0;
+	if(a[idxA] == b[idxB]){
+		ans = lcsUtil(a, b, ia+1, ib+1) + 1;
+	}
+
+	ans = max(ans, max(lcsUtil(a, b, idxA+1, ib), lcsUtil(a,b,ia, idxB+1)));
+
+	dp[idxA][idxB] = ans;
+
+	return dp[idxA][idxB];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
